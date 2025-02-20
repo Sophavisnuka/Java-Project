@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 import java.util.Objects;
+=======
+>>>>>>> 68276912831767f274c9c3caba02c3225a553774
 public class Room {
 
     static int totalRooms = 20;
