@@ -1,7 +1,7 @@
 package HotelManagementSystem;
 
 import java.util.ArrayList;
-
+//interface
 public class Account implements Authentication {
     
     protected String UserName;
@@ -21,9 +21,19 @@ public class Account implements Authentication {
         this.email = email;
         this.password = password;
     }
+    public boolean CheckInput (String UserName, String phoneNumber, String email, String password) {
+        if (UserName.isBlank() || password.isBlank() || email.isBlank() || phoneNumber.isBlank()) {
+            return true;
+        } 
+        return false;
+    }
     @Override 
     public boolean register (String UserName, String phoneNumber, String email, String password) {
-        // Check if username already exists
+        // Check if username already 
+        if (CheckInput(UserName, phoneNumber, email, password)) {
+            System.out.println("Please input all the requirement");
+            return false;
+        }
         for (Account user : userList) {
             if (user.UserName.equals(UserName)) {
                 return false;
@@ -35,13 +45,15 @@ public class Account implements Authentication {
     }
     @Override 
     public boolean login (String email, String password) {
+        if (CheckInput(UserName, phoneNumber, email, password)) {
+            System.out.println("Please input all the requirement");
+            return false;
+        }
         // Check if username already exists
         for (Account user : userList) {
             if (user.password.equals(password) && user.email.equals(email)) {
                 return true;
-            } else {
-                return false;
-            }
+            } 
         }
         System.out.println("Login failed: Username does not exist.");
         return false;
