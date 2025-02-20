@@ -1,6 +1,7 @@
- public class Room {
+import java.util.Objects;
+public class Room {
 
-    static int totalRooms = 100;
+    static int totalRooms = 20;
     private int roomNo;
     private int capacity;
     private String roomType;
@@ -16,11 +17,10 @@
         
         if (Available == false) {
             totalRooms--;
-        } else {
         }
     }
 
-    public int getRoomNo() {
+    public int getRoomNo() {    
         return roomNo;
     }
     
@@ -40,8 +40,13 @@
         return Available;
     }
     
-    public void setAvailable(boolean available) {
-        Available = available;
+    public void setAvailable(boolean Available) {
+        if (this.Available && !Available) {
+            totalRooms--; // Room was available, now occupied
+        } else if (!this.Available && Available) {
+            totalRooms++; // Room was occupied, now available
+        }
+        this.Available = Available;
     }
 
     public double getPricePerNight() {
@@ -58,5 +63,33 @@
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    public static int getTotalRooms() {
+        return totalRooms;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Room room = (Room) obj;
+        return roomNo == room.roomNo;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(roomNo);
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "roomNo=" + roomNo +
+                ", capacity=" + capacity +
+                ", roomType='" + roomType + '\'' +
+                ", PricePerNight=" + PricePerNight +
+                ", Available=" + Available +
+                '}';
     }
 }
