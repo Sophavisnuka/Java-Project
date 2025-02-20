@@ -1,4 +1,4 @@
- public class Room {
+public class Room {
 
     static int totalRooms = 100;
     private int roomNo;

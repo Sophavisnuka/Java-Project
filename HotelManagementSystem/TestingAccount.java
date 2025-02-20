@@ -31,6 +31,8 @@ public class TestingAccount {
                     boolean registrationSuccess = user.register(username, phone, email, password);
                     if (registrationSuccess) {
                         System.out.println("Registration successful!\n");
+                        UserReservation reservation = new UserReservation();
+                        reservation.checkIn();
                     } else {
                         System.out.println("Registration failed. Username might already exist.\n");
                     }

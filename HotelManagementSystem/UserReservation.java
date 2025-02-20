@@ -27,14 +27,13 @@ public class UserReservation {
     //     this.user = user;
     // }
     public UserReservation() {
-        this.userName = "";
-        this.userPhoneNum = "";
         this.checkInDate = LocalDate.now();
         this.checkOutDate = LocalDate.now();
         this.reservationID = generateReservationID();
         this.roomID = generateRoomID();
     }
     public UserReservation(String userName, String userPhoneNum, LocalDate checkInDate, LocalDate checkOutDate) {  
+        // super(userName, userPhoneNum, "default@example.com", "defaultPassword"); // ✅ This constructor exists
         this.userName = userName;
         this.userPhoneNum = userPhoneNum;
         this.checkInDate = checkInDate;
@@ -59,6 +58,17 @@ public class UserReservation {
         userName = input.nextLine();
         System.out.print("Enter your phone number: ");
         userPhoneNum = input.nextLine();
+
+        if (userName.isBlank() || userPhoneNum.isBlank()) {
+            System.out.println("Please input all the requirement");
+            input.close();
+        }
+        Account user = Account.findUserByUsername(userName);
+    
+        if (!user.UserName.equals(userName) || !user.phoneNumber.equals(userPhoneNum)) {
+            System.out.println("User not found or phone number does not match. Please register first.");
+            return;
+        }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         System.out.print("Input check in date (dd-MM-yyyy): " );
